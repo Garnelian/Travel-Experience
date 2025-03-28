@@ -67,7 +67,8 @@ The API will be available at `http://localhost:5221`.
 Unit and integration tests have been implemented for each of the API services. You can run them using the following command:
 
 ```bash
-dotnet test
+cd TravelExperienceTest
+dotnet test --list-tests
 ```
 
 ### **Logs**
