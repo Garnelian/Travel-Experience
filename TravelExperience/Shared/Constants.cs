@@ -1,4 +1,4 @@
-﻿namespace RoulettesGame.Shared
+﻿namespace TravelExperience.Shared
 {
     public static class Constants
     {
