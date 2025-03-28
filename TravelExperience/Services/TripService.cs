@@ -11,9 +11,11 @@ namespace TravelExperience.Services
 
         public async Task<Trip> CreateTripAsync(Trip trip)
         {
+            await _unitOfWork.TripRepository.AddTripAsync(trip);
+
             await _unitOfWork.CompleteAsync();
 
-            return await _unitOfWork.TripRepository.AddTripAsync(trip);
+            return trip;
         }
     }
 }

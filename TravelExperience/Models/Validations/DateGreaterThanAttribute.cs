@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TravelExperience.Validations
+namespace TravelExperience.Models.Validations
 {
     public class DateGreaterThanAttribute : ValidationAttribute
     {

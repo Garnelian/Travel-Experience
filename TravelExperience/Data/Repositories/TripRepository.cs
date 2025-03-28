@@ -11,8 +11,11 @@ namespace TravelExperience.Data.Repositories
         public async Task<Trip> AddTripAsync(Trip trip)
         {
             trip.TotalCost = trip.Activities.Sum(a => a.Cost);
+
             _context.Trips.Add(trip);
-            await _context.SaveChangesAsync();
+
+            //await _context.SaveChangesAsync();
+
             return trip;
         }
     }

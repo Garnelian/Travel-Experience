@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using TravelExperience.Validations;
+using TravelExperience.Models.Validations;
+
 
 namespace TravelExperience.Models
 {

@@ -7,7 +7,7 @@ namespace TravelExperience.Models
     {
         [Key]
         public int ActivityId { get; set; }
-
+        [JsonIgnore]
         public int TripId { get; set; }  
 
         [Required(ErrorMessage = "DestinationId is required.")]
@@ -18,7 +18,5 @@ namespace TravelExperience.Models
 
         [Range(0.01, double.MaxValue, ErrorMessage = "Cost must be greater than 0.")]
         public decimal Cost { get; set; }
-        [JsonIgnore]
-        public Trip Trip { get; set; }
     }
 }

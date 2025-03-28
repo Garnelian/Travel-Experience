@@ -3,18 +3,20 @@ using Microsoft.AspNetCore.Mvc;
 using RoulettesGame.Shared;
 using TravelExperience.Models;
 using TravelExperience.Services;
+using TravelExperience.Services.Interfaces;
 
 namespace TravelExperience.Controllers
 {
     [Route("api/trips")]
     public class TripsController : ControllerBase
     {
-        private readonly TripService _tripService;
+        private readonly ITripService _tripService;
         private readonly ILogger<TripsController> _logger;
 
-        public TripsController(TripService tripService, ILogger<TripsController> logger) {
+        public TripsController(ITripService tripService, ILogger<TripsController> logger)
+        {
             _tripService = tripService;
-            _logger= logger;
+            _logger = logger;
         }
 
         [HttpPost]
@@ -22,7 +24,7 @@ namespace TravelExperience.Controllers
         {
             try
             {
-                if (trip == null || !trip.Activities.Any()) return BadRequest(Constants.INVALID_TRIP_DATA);
+                if (!ModelState.IsValid) return BadRequest(new { Error = Constants.INVALID_TRIP_DATA, ModelState });
 
                 var createdTrip = await _tripService.CreateTripAsync(trip);
 
@@ -30,7 +32,7 @@ namespace TravelExperience.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error placing bet. Mesagge:{ex.Message}, StackTrace:{ex.StackTrace}");
+                _logger.LogError($"Error Create Trip. Mesagge:{ex.Message}, StackTrace:{ex.StackTrace}");
 
                 return StatusCode(500, new { Error = Constants.SERVER_ERROR });
             }

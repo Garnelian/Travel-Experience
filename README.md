@@ -27,23 +27,65 @@ We chose **SQL Server** as the database for this project because:
 
 3. **Relationships**:
    - We established a **one-to-many relationship** between `Trip` and `Activity` using a foreign key (`TripId` in `Activity`).
-   - The relationship is configured in the `AppDbContext` class using `ModelBuilder`.
+   - The relationship is configured in the `ApplicationDbContext` class using `ModelBuilder`.
 
 4. **Design Patterns**:
    - **Repository Pattern**: This is used for data access, allowing us to isolate the logic of interacting with the database.
    - **Unit of Work Pattern**: This pattern is used to manage transactions, ensuring that changes to multiple entities are committed in a single transaction.
+   - The patterns are implemented to ensure separation of concerns and better maintainability.
+   
+5. - **Serilog** is used for logging events, providing detailed logs in both the console and a file for easier debugging and monitoring.
 
-5. **JSON Serialization**:
-   - We applied the `JsonIgnore` attribute to avoid cyclical references between `Activity` and `Trip` when serializing the objects. If you want to preserve relationships in serialization, you can enable `ReferenceHandler.Preserve`.
+## **How to Run the Code**
 
-## How to Run the Code
-
-### Prerequisites
-- .NET 6 or higher
-- SQL Server (LocalDB or a full SQL Server instance)
-
-### Steps
-1. Clone the repository:
+### **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/travel-experience-service.git
-   cd travel-experience-service
+   git clone https://github.com/Garnelian/Travel-Experience.git
+   cd Travel-Experience
+   ```
+
+### **Database Configuration (SQL Server)**
+
+Ensure that **SQL Server** is running (either in a Docker container or a local instance). Then, perform the necessary migrations using Entity Framework Core:
+
+```bash
+dotnet ef database update
+```
+
+### **Run the API**
+
+Once all the services are configured, you can run the API:
+
+```bash
+dotnet run
+```
+
+The API will be available at `http://localhost:5221`.
+
+### **Tests**
+
+Unit and integration tests have been implemented for each of the API services. You can run them using the following command:
+
+```bash
+dotnet test
+```
+
+### **Logs**
+
+The project uses **Serilog** for event logging. Logs are stored both in the console and in a text file (`Logs/app.log`).
+
+## **Technologies Used**
+
+- **.NET 8**: Development framework.
+- **SQL Server**: Relational database.
+- **Entity Framework Core**: ORM to interact with SQL Server.
+
+## **Assumptions Made**
+
+- The application assumes that **SQL Server** is properly set up and accessible.
+- The API endpoints expect a correct JSON format for creating trips and activities.
+- Database migrations will be handled manually by running `dotnet ef database update`.
+
+## **Prerequisites**
+- .NET 8 or higher
+- SQL Server (LocalDB or a full SQL Server instance)
