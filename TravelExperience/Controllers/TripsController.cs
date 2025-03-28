@@ -28,7 +28,7 @@ namespace TravelExperience.Controllers
 
                 var createdTrip = await _tripService.CreateTripAsync(trip);
 
-                return Ok(trip);
+                return Ok(createdTrip);
             }
             catch (Exception ex)
             {

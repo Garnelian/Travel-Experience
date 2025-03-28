@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using TravelExperience.Data.Repositories.Interfaces;
+﻿using TravelExperience.Data.Repositories.Interfaces;
 using TravelExperience.Models;
 
 namespace TravelExperience.Data.Repositories
@@ -12,9 +11,7 @@ namespace TravelExperience.Data.Repositories
         {
             trip.TotalCost = trip.Activities.Sum(a => a.Cost);
 
-            _context.Trips.Add(trip);
-
-            //await _context.SaveChangesAsync();
+            await _context.Trips.AddAsync(trip);
 
             return trip;
         }
